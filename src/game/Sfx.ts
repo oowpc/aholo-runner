@@ -45,6 +45,10 @@ export class Sfx {
     this.tone(320, 620, 0.18, 'triangle', 0.08)
   }
 
+  roll(): void {
+    this.tone(520, 150, 0.2, 'sine', 0.06)
+  }
+
   pickup(): void {
     this.tone(880, 1320, 0.09, 'sine', 0.07)
     this.tone(1320, 1760, 0.08, 'sine', 0.05, 0.05)

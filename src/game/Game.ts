@@ -12,9 +12,9 @@ import { HUD } from '../ui/HUD'
 import { Gallery } from '../ui/Gallery'
 
 const FIXED_STEP = 1 / 60
-const START_SPEED = 13
-const MAX_SPEED = 26
-const SPEED_RAMP = 0.34
+const START_SPEED = 14
+const MAX_SPEED = 28
+const SPEED_RAMP = 0.38
 const THEME_KEY = 'make-it-run.theme'
 
 type GameState = 'menu' | 'playing' | 'paused' | 'dead'
@@ -63,7 +63,7 @@ export class Game {
     this.renderer.shadowMap.enabled = true
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping
-    this.renderer.toneMappingExposure = 1.05
+    this.renderer.toneMappingExposure = 1.22
     root.appendChild(this.renderer.domElement)
 
     this.scene.background = new THREE.Color(this.theme.bg)
@@ -73,10 +73,10 @@ export class Game {
     this.camera.position.set(0, 3.15, 6.4)
     this.camera.lookAt(0, 1.15, 0)
 
-    this.hemisphere = new THREE.HemisphereLight(this.theme.sun, this.theme.ground, 1.25)
+    this.hemisphere = new THREE.HemisphereLight(this.theme.sun, this.theme.ground, 1.45)
     this.scene.add(this.hemisphere)
 
-    this.sun = new THREE.DirectionalLight(0xffffff, 2.1)
+    this.sun = new THREE.DirectionalLight(0xffffff, 2.35)
     this.sun.position.set(6, 12, 7)
     this.sun.castShadow = true
     this.sun.shadow.mapSize.set(1024, 1024)
@@ -125,6 +125,9 @@ export class Game {
     this.menu.show(this.scoring.best, this.themeId)
     this.renderer.setAnimationLoop(() => this.frame())
     void this.loadModels()
+    if (new URLSearchParams(window.location.search).has('debug')) {
+      ;(window as unknown as { __game: Game }).__game = this
+    }
   }
 
   private async loadModels(): Promise<void> {
@@ -187,8 +190,8 @@ export class Game {
     this.hud.update(0, 0, this.scoring.best)
     this.hud.show()
     this.applyTheme(this.themeId, false)
-    this.camera.position.set(0, 4.35, 7.6)
-    this.camera.lookAt(0, 1.25, -7)
+    this.camera.position.set(0, 3.7, 6.9)
+    this.camera.lookAt(0, 1.15, -8)
 
     this.sfx.unlock()
     this.sfx.start()
@@ -264,6 +267,13 @@ export class Game {
     }
   }
 
+  private roll(): void {
+    if (this.player.roll()) {
+      this.sfx.unlock()
+      this.sfx.roll()
+    }
+  }
+
   private bindInput(): void {
     window.addEventListener('keydown', (event) => {
       if (event.code === 'Escape') {
@@ -302,6 +312,9 @@ export class Game {
       } else if (event.code === 'Space' || event.code === 'ArrowUp' || event.code === 'KeyW') {
         event.preventDefault()
         this.jump()
+      } else if (event.code === 'ArrowDown' || event.code === 'KeyS') {
+        event.preventDefault()
+        this.roll()
       }
     })
 
@@ -333,6 +346,8 @@ export class Game {
           this.movePlayer(dx < 0 ? -1 : 1)
         } else if (absY > 24 && dy < 0) {
           this.jump()
+        } else if (absY > 24 && dy > 0) {
+          this.roll()
         } else if (absX < 14 && absY < 14) {
           this.jump()
         }
@@ -361,13 +376,11 @@ export class Game {
     this.player.update(dt, true)
     this.track.update(dt, this.speed)
 
-    const result = this.obstacles.update(
-      dt,
-      this.speed,
-      this.theme,
-      this.player.x,
-      this.player.y,
-    )
+    const result = this.obstacles.update(dt, this.speed, this.theme, {
+      x: this.player.x,
+      y: this.player.y,
+      rolling: this.player.rolling,
+    })
 
     if (result.picked > 0) {
       this.scoring.collect(result.picked)
@@ -392,11 +405,11 @@ export class Game {
       this.camera.lookAt(0, 1.15, 0)
     } else {
       const targetX = this.player.x * 0.42
-      const targetY = 4.35 + Math.min(0.45, this.player.y * 0.06)
-      this.camera.position.x += (targetX - this.camera.position.x) * Math.min(1, dt * 6)
-      this.camera.position.y += (targetY - this.camera.position.y) * Math.min(1, dt * 6)
-      this.camera.position.z += (7.6 - this.camera.position.z) * Math.min(1, dt * 6)
-      this.camera.lookAt(this.player.x * 0.22, 1.25, -7)
+      const targetY = 3.65 + Math.min(0.5, this.player.y * 0.09)
+      this.camera.position.x += (targetX - this.camera.position.x) * Math.min(1, dt * 7)
+      this.camera.position.y += (targetY - this.camera.position.y) * Math.min(1, dt * 7)
+      this.camera.position.z += (6.9 - this.camera.position.z) * Math.min(1, dt * 7)
+      this.camera.lookAt(this.player.x * 0.22, 1.1, -9)
     }
 
     if (this.shake > 0.001) {

@@ -47,9 +47,9 @@ export class Gallery {
           <button type="button" class="btn ghost close-gallery">返回</button>
         </header>
         <p class="gallery-lead">
-          游戏内的玩家角色、障碍与收集物全部由 Aholo Lux3D 生成：照片经图生 3D 变成跑者，
-          其余道具用文生 3D 制作，导出 GLB 后接入 WebGL 场景。这里保留每次生成的提示词与用途，
-          与项目报告书中的过程记录一一对应。
+          游戏内的玩家角色、跳跃障碍与金币全部由 Aholo Lux3D 生成：照片经图生 3D 变成跑者，
+          其余道具用文生 3D 制作，导出 GLB 后接入 WebGL 场景。列车、翻滚闸门与城市轨道为程序化几何，
+          使用主题材质。这里保留每次生成的提示词与用途，与项目报告书中的过程记录一一对应。
         </p>
         <div class="gallery-grid">${cards}</div>
       </div>

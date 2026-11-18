@@ -23,7 +23,7 @@ export class HUD {
       </div>
       <div class="hud-best">最佳 <strong data-hud="best">0</strong> m</div>
       <div class="hud-stat hud-fragments">
-        <span class="hud-label">灵感碎片</span>
+        <span class="hud-label">金币</span>
         <strong class="hud-value" data-hud="fragments">0</strong>
       </div>
       <button type="button" class="icon-btn pause-btn" aria-label="暂停">II</button>

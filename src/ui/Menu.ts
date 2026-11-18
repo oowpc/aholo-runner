@@ -33,13 +33,13 @@ export class Menu {
         <p class="eyebrow">AHOLO · 3D AI HACKATHON</p>
         <h1>造物跑酷</h1>
         <p class="subtitle">MAKE IT RUN</p>
-        <p class="lead">把身边的物品交给 Aholo Lux3D，<br>变成你的跑者，冲进生成的世界。</p>
+        <p class="lead">把身边的物品交给 Aholo Lux3D，<br>变成你的跑者，冲进生成的地铁世界。</p>
         <div class="theme-list" role="group" aria-label="选择主题"></div>
         <div class="actions">
           <button type="button" class="btn primary" data-action="start">开始奔跑</button>
           <button type="button" class="btn ghost" data-action="gallery">造物档案</button>
         </div>
-        <p class="hint">← → 换道 · 空格 / ↑ 跳跃 · 手机滑动或点按</p>
+        <p class="hint">← → 换道 · ↑ 跳跃 · ↓ 翻滚 · 手机滑动或点按</p>
         <p class="best">最佳里程 <strong>0</strong> m</p>
       </div>
     `
@@ -75,7 +75,7 @@ export class Menu {
         <p class="eyebrow">RUN COMPLETE</p>
         <h2>本次造物里程</h2>
         <p class="result-distance"><strong>0</strong><span>m</span></p>
-        <p class="result-meta">灵感碎片 <strong>0</strong> · 最佳 <strong>0</strong> m</p>
+        <p class="result-meta">金币 <strong>0</strong> · 最佳 <strong>0</strong> m</p>
         <p class="record-badge is-hidden">新纪录</p>
         <div class="actions">
           <button type="button" class="btn primary" data-action="restart">再跑一次</button>

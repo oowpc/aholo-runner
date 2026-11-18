@@ -15,9 +15,10 @@
 |---|---|---|
 | 换道 | ← → / A D | 左右滑动 |
 | 跳跃 | 空格 / ↑ / W | 上滑或点按 |
+| 翻滚 | ↓ / S | 下滑 |
 | 暂停 | Esc | 右上角暂停按钮 |
 
-躲避障碍、收集灵感碎片，撞击后结束，距离计入本地最佳纪录。
+躲开列车、跳过低障碍、翻滚穿过闸门，收集金币；撞击后结束，距离计入本地最佳纪录。
 
 ## 本地运行
 
@@ -35,12 +36,12 @@ npm run preview
 | 用途 | 文件名 |
 |---|---|
 | 玩家角色（图生 3D） | `player_plush.glb` |
-| 雪地小屋 · 障碍 | `snow_obstacle_pine.glb` / `snow_obstacle_pile.glb` / `snow_obstacle_fence.glb` |
-| 雪地小屋 · 碎片 | `snow_pickup_ice.glb` |
-| 古村探险 · 障碍 | `village_obstacle_lantern.glb` / `village_obstacle_well.glb` / `village_obstacle_basket.glb` |
-| 古村探险 · 碎片 | `village_pickup_coin.glb` |
-| 赛博玩具城 · 障碍 | `toy_obstacle_blocks.glb` / `toy_obstacle_duck.glb` / `toy_obstacle_rocket.glb` |
-| 赛博玩具城 · 碎片 | `toy_pickup_gear.glb` |
+| 雪地小屋 · 跳跃障碍 | `snow_obstacle_pine.glb` / `snow_obstacle_pile.glb` / `snow_obstacle_fence.glb` |
+| 雪地小屋 · 金币 | `snow_pickup_ice.glb` |
+| 古村探险 · 跳跃障碍 | `village_obstacle_lantern.glb` / `village_obstacle_well.glb` / `village_obstacle_basket.glb` |
+| 古村探险 · 金币 | `village_pickup_coin.glb` |
+| 赛博玩具城 · 跳跃障碍 | `toy_obstacle_blocks.glb` / `toy_obstacle_duck.glb` / `toy_obstacle_rocket.glb` |
+| 赛博玩具城 · 金币 | `toy_pickup_gear.glb` |
 
 建议：单模型 ≤ 20k 三角面、贴图 ≤ 1024、单文件 ≤ 2MB。导入后可在「造物档案」中把对应条目的 `generated` 改为 `true` 并补充截图。
 
